@@ -1,0 +1,14 @@
+{% if latest_product_list %}
+    {% for product in latest_product_list %}
+        Product : {{ product.name }} <br>
+        add in store : {{ product.date_add }} <br>
+        {{ product.quantity }} is available in store<br>
+        
+        <form action="{{ product.pk }}" method="GET">
+            <input type="submit" value="Go to {{ product.name }}">
+        </form>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No product is available</p>
+{% endif %}

@@ -1,0 +1,11 @@
+<h2>Log in page</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    username : 
+    {{form.username}}<br>
+
+    password : 
+    {{form.password}}<br>
+    <input type="submit">
+    <a href= {{ signup_link }}>sign up</a>
+</form>
