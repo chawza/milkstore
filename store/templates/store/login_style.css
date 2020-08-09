@@ -1,0 +1,13 @@
+#main-area {
+    padding: 20%;
+    padding-top: 5%;
+}
+
+#header-area {
+    padding: 0;
+}
+
+#form-area {
+    padding: 20px;
+    background-color: lightgray;
+}
