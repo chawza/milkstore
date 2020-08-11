@@ -1,6 +1,51 @@
-<h2>Sigun up your account</h2>
-<form action="signup" method="POST">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join us!</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/login_style.css">
+    <script src="../../../static/js/jquery-3.5.1.js"></script>
+    <script src="../../static/js/login.js"></script>
+</head>
+<body>
+    <div class="container" id="main-area">
+        <div class="row">
+            <div class="col" id="header-area">
+                <h1>MILK? want some?</h1><br>
+                <p>Join us to get our best Milks by creating your Milkstore Account</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col" id="form-area">
+                <form>
+                    <div class="form-group">
+                        <label for="email_input">Email address</label>
+                        <input type="email" class="form-control" id="input_email" placeholder="email@mail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="input_username">Username</label>
+                        <input type="text" class="form-control" id="input_username" placeholder="Who do you want to be called?">
+                    </div>
+                    <div class="form-group">
+                        <label for="password_input">Password</label>
+                        <input type="password" class="form-control" id="password_input" placeholder="password">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary">Sign up!</button>
+                        </div>
+                        <div class="col-6">
+                            <a href="">back to login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
