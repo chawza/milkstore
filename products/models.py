@@ -3,12 +3,17 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
+from accounts.models import Store
+
 # Create your models here.
 class Product(models.Model):
-    name = models.CharField(max_length=32)
-    date_add = models.DateTimeField('date add in database')
-    quantity = models.IntegerField('availabale in storage')
-    thumbnail = models.CharField(max_length=32)
+    name = models.CharField(max_length=255)
+    store_id = models.ForeignKey(Store, on_delete=models.CASCADE, default=0)
+    price = models.IntegerField(default=0)
+    quantity = models.IntegerField()
+    description = models.TextField(default='Product descriptions')
+    thumbnail = models.CharField(max_length=255)
+    date_add = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name

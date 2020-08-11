@@ -4,8 +4,8 @@ from django.db import models
 
 class Account(models.Model):
     username = models.CharField(max_length=255)
-    password = models.CharField()
-    cardnumber = models.CharField(max_length=19)
+    password = models.CharField(max_length=255)
+    cardnumber = models.CharField(max_length=19, default='XXXXXXXXX')
     date_create = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
