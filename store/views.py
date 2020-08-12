@@ -6,5 +6,5 @@ from django.apps import apps
 
 # Create your views here.
 
-def home(request, account_id):
-    return HttpResponse('this is home for %s' %account_id)
+def home(request):
+    return render(request, 'store/home.html')

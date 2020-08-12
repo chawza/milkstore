@@ -1,184 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go buy some milk!</title>
+{% extends "../base_home.html" %}
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../static/css/home_style.css">
-    <script src="home.js"></script>
-    <script src="../../static/js/home.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav id="nav">
-            <div class="row">
-                <div class="col-2" id="logo-area">
-                    <div class="row">
-                        <img src="imgs/milk-logo.png" width=40 height=40>
-                        <h2><a href="">Milkstore</a></h2>
-                    </div>
-                </div>
-
-                <div class="col-6" id="search-bar">
-                    <div class="row">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="what milk in your mind?">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="search-button"><img src="imgs/search-logo.png" width=20 height=20></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4" id="nav-area">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Store</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Area-2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Profile</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <hr>
-
-        <main>
-            <div class="row" id="shopping-area">
-                <div class="col-9" id="product-browser">
-                    <div class="row row-cols-2">
-                        <!-- prototype -->
-                        <div class="col-4">
-                            <div class="card h-100">
-                                <img src="imgs/milk carton.jpg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <h6 class="card-subtitle">Store name</h6>
-                                    <p>Description here with bla bla bla</p>
-                                    <h4>Rp. 330000</h4>
-                                    <button class="btn btn-primary">+</button>
-                                    <button class="btn btn-primary">-</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- prototype -->
-                        <div class="col-4">
-                            <div class="card h-100">
-                                <img src="imgs/o-MILK-facebook.jpg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <h6 class="card-subtitle">Store name</h6>
-                                    <p>Description here with bla bla bla</p>
-                                    <h4>Rp. 330000</h4>
-                                    <button class="btn btn-primary">+</button>
-                                    <button class="btn btn-primary">-</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card h-100">
-                                <img src="imgs/milk carton.jpg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <h6 class="card-subtitle">Store name</h6>
-                                    <p>Description here with bla bla bla</p>
-                                    <h4>Rp. 330000</h4>
-                                    <button class="btn btn-primary">+</button>
-                                    <button class="btn btn-primary">-</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- prototype -->
-                        <div class="col-4">
-                            <div class="card h-100">
-                                <img src="imgs/o-MILK-facebook.jpg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <h6 class="card-subtitle">Store name</h6>
-                                    <p>Description here with bla bla bla</p>
-                                    <h4>Rp. 330000</h4>
-                                    <button class="btn btn-primary">+</button>
-                                    <button class="btn btn-primary">-</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-
-                <div class="col-3" id="cart-area">
-                    <div class="card">
+{% block content %}
+<main>
+    <div class="row" id="shopping-area">
+        <div class="col-9" id="product-browser">
+            <div class="row row-cols-3">
+                <!-- prototype -->
+                <div class="col-4">
+                    <div class="card h-100">
+                        <img src="imgs/milk carton.jpg" class="card-img-top">
                         <div class="card-body">
-                            <p class="card-subtitle">Total Amount</p>
-                            <h5 id="total-amount" class="card-title">40.000</h5>
-                            <p class="card-text">items : 5</p>
-                            <p class="card-text">more description</p>
-                            <p class="card-text">more description</p>
-                            <div class="row">
-                                <div class="col">
-                                    <button type="button" class="btn btn-primary">Checkout</button>
-                                </div>
-                                <div class="col">
-                                    <button type="button" class="btn btn-secondary">clear</button>
-                                </div>
-                            </div>
+                            <h5 class="card-title">Product Name</h5>
+                            <h6 class="card-subtitle">Store name</h6>
+                            <p>Description here with bla bla bla</p>
+                            <h4>Rp. 330000</h4>
+                            <button class="btn btn-primary">+</button>
+                            <button class="btn btn-primary">-</button>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h5 class="card-title">product name</h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <button type="button" class="btn btn-alert">X</button>
-                                    </div>
-                                </div>
-                                <p class="card-subtitle">price : 5000</p>
-                                <p class="card-subtitle">quantity : 5</p>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h5 class="card-title">product name</h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <button type="button" class="btn btn-alert">X</button>
-                                    </div>
-                                </div>
-                                <p class="card-subtitle">price : 5000</p>
-                                <p class="card-subtitle">quantity : 5</p>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h5 class="card-title">product name</h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <button type="button" class="btn btn-alert">X</button>
-                                    </div>
-                                </div>
-                                <p class="card-subtitle">price : 5000</p>
-                                <p class="card-subtitle">quantity : 5</p>
-                            </li>
-                        </ul>
                     </div>
                 </div>
+                <!-- prototype -->
+                <div class="col-4">
+                    <div class="card h-100">
+                        <img src="imgs/o-MILK-facebook.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name</h5>
+                            <h6 class="card-subtitle">Store name</h6>
+                            <p>Description here with bla bla bla</p>
+                            <h4>Rp. 330000</h4>
+                            <button class="btn btn-primary">+</button>
+                            <button class="btn btn-primary">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card h-100">
+                        <img src="imgs/milk carton.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name</h5>
+                            <h6 class="card-subtitle">Store name</h6>
+                            <p>Description here with bla bla bla</p>
+                            <h4>Rp. 330000</h4>
+                            <button class="btn btn-primary">+</button>
+                            <button class="btn btn-primary">-</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- prototype -->
+                <div class="col-4">
+                    <div class="card h-100">
+                        <img src="imgs/o-MILK-facebook.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name</h5>
+                            <h6 class="card-subtitle">Store name</h6>
+                            <p>Description here with bla bla bla</p>
+                            <h4>Rp. 330000</h4>
+                            <button class="btn btn-primary">+</button>
+                            <button class="btn btn-primary">-</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
             </div>
-        </main>
+        </div>
 
-        <footer>
-
-        </footer>
+        <div class="col-3" id="cart-area">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-subtitle">Total Amount</p>
+                    <h5 id="total-amount" class="card-title">40.000</h5>
+                    <p class="card-text">items : 5</p>
+                    <p class="card-text">more description</p>
+                    <p class="card-text">more description</p>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-primary">Checkout</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-secondary">clear</button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-8">
+                                <h5 class="card-title">product name</h6>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-alert">X</button>
+                            </div>
+                        </div>
+                        <p class="card-subtitle">price : 5000</p>
+                        <p class="card-subtitle">quantity : 5</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-8">
+                                <h5 class="card-title">product name</h6>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-alert">X</button>
+                            </div>
+                        </div>
+                        <p class="card-subtitle">price : 5000</p>
+                        <p class="card-subtitle">quantity : 5</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-8">
+                                <h5 class="card-title">product name</h6>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-alert">X</button>
+                            </div>
+                        </div>
+                        <p class="card-subtitle">price : 5000</p>
+                        <p class="card-subtitle">quantity : 5</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</main>
+{% endblock %}
