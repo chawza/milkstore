@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome friend!</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href='{% static "accounts/css/login_style.css" %}'>
+    <script src='{% static "js/jquery-3.5.1.js" %}'></script>
+    <script src='{% static "accounts/js/login.js" %}'></script>
+</head>
+<body>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
