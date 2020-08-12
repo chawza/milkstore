@@ -1,2 +1,3 @@
 id_pass.txt
 db.sqlite3
+products/static/product_img/**
