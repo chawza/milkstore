@@ -2,3 +2,13 @@
     margin-top: 20px;
     margin-bottom: 14px;
 }
+
+.card-img-top {
+    width: 90%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.col-4 {
+    padding: 15px;
+}
