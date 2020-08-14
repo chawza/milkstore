@@ -30,12 +30,12 @@ function renderProductLIst(){
         return
     }
 
+    //iterate over product list to render the html
     var browse_content = ''
-
     for(product of productlists.items){
         img_url = location.origin + '/products/img/' + product.id
 
-        browse_content += `
+        browse_content = `
         <div class="col-4">
             <div class="card h-100">
                 <img src="${img_url}" class="card-img-top">
@@ -49,8 +49,8 @@ function renderProductLIst(){
             </div>
         </div>
         `
+        productbrowser.append(browse_content)
     }
-    productbrowser.append(browse_content)
 }
 
 getproductlist()
