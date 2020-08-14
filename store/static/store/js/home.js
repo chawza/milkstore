@@ -1,15 +1,15 @@
 let browseitems = 12
 let browsepage = 1
 
-let productlists
-let shoppinglist
+let productlists = []
+let shoppinglist = []
 
 function getproductlist(){
     // create object that handles request
     var req = new XMLHttpRequest()
 
     // create connection to server
-    req.open("GET", `getproductlist/${browseitems}/${browsepage}`)
+    req.open("GET", `getproductlist/${browseitems}/${browsepage}`, false)
 
     // decide what to do when we get HTTP response
     req.onload = function() {
@@ -24,7 +24,6 @@ function renderProductLIst(){
     productbrowser.html("")
 
     // if products have not recieved from server
-    console.log(productlists.length)
     if(productlists.length == 0){
         productbrowser.html("No product!")
         return
