@@ -1,8 +1,8 @@
-var browseitems = 12
-var browsepage = 1
+let browseitems = 12
+let browsepage = 1
 
-var productlists
-var shoppinglist
+let productlists
+let shoppinglist
 
 function getproductlist(){
     // create object that handles request
@@ -13,7 +13,7 @@ function getproductlist(){
 
     // decide what to do when we get HTTP response
     req.onload = function() {
-        productlists = JSON.parse(req.response)
+        productlists = JSON.parse(req.response).items
     }   
     //send now
     req.send()
@@ -24,15 +24,15 @@ function renderProductLIst(){
     productbrowser.html("")
 
     // if products have not recieved from server
-    console.log(productlists.items.length)
-    if(productlists.items.length == 0){
+    console.log(productlists.length)
+    if(productlists.length == 0){
         productbrowser.html("No product!")
         return
     }
 
     //iterate over product list to render the html
     var browse_content = ''
-    for(product of productlists.items){
+    for(product of productlists){
         img_url = location.origin + '/products/img/' + product.id
 
         browse_content = `
@@ -54,4 +54,4 @@ function renderProductLIst(){
 }
 
 getproductlist()
-setInterval(renderProductLIst(), 1000)
+renderProductLIst()
