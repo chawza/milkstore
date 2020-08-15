@@ -4,11 +4,16 @@
 }
 
 .card-img-top {
-    width: 90%;
+    width: 80%;
     height: 12rem;
     object-fit: cover;
 }
 
 .col-4 {
     padding: 15px;
+}
+
+.card img {
+    margin : auto;
+    margin-top: 15px;
 }
