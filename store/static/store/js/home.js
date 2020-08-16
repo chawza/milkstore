@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 let browseitems = 12
 let browsepage = 1
 
@@ -75,6 +77,13 @@ function calculateShoppingDetail(){
     $("#number-items").html(n_items + ' items')
 }
 
+function clearShoppingList() {
+    delete shoppinglist.items
+    shoppinglist.items = {}
+    
+    renderShoppingList()
+}
+
 function renderProductLIst(){
     var productbrowser = $("#product-list-area")
     productbrowser.html("")
@@ -135,7 +144,7 @@ function renderShoppingList(){
             <li id="product-${item.product.id}" class="list-group-item">
                 <div class="row">
                     <div class="col-8">
-                        <h5 class="card-title">${item.product.name}</h6>
+                        <h6 class="card-title">${item.product.name}</h6>
                     </div>
                     <div class="col-4">
                         <button id="btn-del-${item.product.id}" type="button" class="btn btn-alert">X</button>
@@ -170,5 +179,11 @@ function renderShoppingList(){
     $("#number-items").html(n_items + ' items')
 }
 
+$("#btn-clear").click(function(){
+    clearShoppingList()
+})
+
 getproductlist()
 renderProductLIst()
+renderShoppingList()
+})
