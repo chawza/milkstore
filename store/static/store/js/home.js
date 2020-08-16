@@ -56,6 +56,25 @@ function sub_shopping_list(pk){
         delete shoppinglist.items[item]
 }
 
+function calculateShoppingDetail(){
+    let amount = 0
+    let n_product = Object.keys(shoppinglist.items).length
+    let n_items = 0
+
+    //iterate over shopping list to sum the amount
+    for (itemlist in shoppinglist.items){
+        item = shoppinglist.items[itemlist]
+
+        amount += item.qty * item.product.price
+        n_items += item.qty
+    }
+
+    //assign the value
+    $("#total-amount").html('RP. ' + amount)
+    $("#number-product").html(n_product + ' products')
+    $("#number-items").html(n_items + ' items')
+}
+
 function renderProductLIst(){
     var productbrowser = $("#product-list-area")
     productbrowser.html("")
@@ -92,12 +111,64 @@ function renderProductLIst(){
         //add event function when the buttons are click
         $("#btn-add-"+product.id).click(function(){
             add_shopping_list(this.value.split("-")[1])
+            renderShoppingList()
         })
 
         $("#btn-sub-"+product.id).bind('click', function(){
             sub_shopping_list(this.value.split("-")[1])
+            renderShoppingList()
         })
     }
 }
+
+function renderShoppingList(){
+    let shoppinglist_area = $("#shopping-list-area")
+    shoppinglist_area.html("")
+    let amount = 0
+    let n_product = Object.keys(shoppinglist.items).length
+    let n_items = 0
+
+    for (itemlist in shoppinglist.items){
+        item = shoppinglist.items[itemlist]
+        
+        let template = `
+            <li id="product-${item.product.id}" class="list-group-item">
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="card-title">${item.product.name}</h6>
+                    </div>
+                    <div class="col-4">
+                        <button id="btn-del-${item.product.id}" type="button" class="btn btn-alert">X</button>
+                    </div>
+                </div>
+                <p class="card-subtitle">price : ${item.product.price}</p>
+                <p class="card-subtitle">quantity : ${item.qty}</p>
+            </li>
+        `
+        //append the template
+        shoppinglist_area.append(template)
+
+        // add function to the delete button
+        $("#btn-del-" + item.product.id).click(function(){
+            // delete the selected product from the list
+            delete shoppinglist.items['item-' + item.product.id]
+
+            // delete the element list
+            $("#product-" + item.product.id).remove()
+
+            // render the recalculated shopping list
+            calculateShoppingDetail()
+        })
+
+        // sum the caculation for card's body
+        amount += item.qty * item.product.price
+        n_items += item.qty
+    }
+
+    $("#total-amount").html('RP. ' + amount)
+    $("#number-product").html(n_product + ' products')
+    $("#number-items").html(n_items + ' items')
+}
+
 getproductlist()
 renderProductLIst()
