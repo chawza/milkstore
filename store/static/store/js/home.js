@@ -26,11 +26,19 @@ function add_shopping_list(pk){
     let item = "item-"+ pk  //accessing the item insinde shoppinglists
 
     //define the item if the product has not been added to the shopping list
-    if(shoppinglist.items[item] == null)
-        shoppinglist.items[item] = 0
+    if(shoppinglist.items[item] == null){
+        shoppinglist.items[item] = {}   //declare before define the property
+        
+        //clone the product detail into shopping list
+        shoppinglist.items[item].product = productlists.filter(function(a){
+            return a.id == pk
+        })[0]
+        shoppinglist.items[item].qty = 0
+    }
+        
     
     //increment the number of items
-    shoppinglist.items[item] += 1
+    shoppinglist.items[item].qty += 1
 }
 
 function sub_shopping_list(pk){
@@ -41,10 +49,10 @@ function sub_shopping_list(pk){
         return
 
     // subtract the value
-    shoppinglist.items[item] -= 1
+    shoppinglist.items[item].qty -= 1
 
     //if the item number is below 1, we discard the item from list
-    if(shoppinglist.items[item] <= 0)
+    if(shoppinglist.items[item].qty <= 0)
         delete shoppinglist.items[item]
 }
 
