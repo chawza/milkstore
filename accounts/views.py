@@ -1,16 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, Http404
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
+from django.contrib import messages
 
-from . import accounts_form
+from .forms import SignupForm
 from .models import Account
 
 # Create your views here.
 
 def login(request):
     if request.method == 'GET':
-        form = accounts_form.LoginForm()
+        form = LoginForm()
         return render(request, 'accounts/login.html', context={'form': form, 'signup_link' : 'signup'})
 
     elif request.method == 'POST':
@@ -26,16 +27,20 @@ def login(request):
 def signup(request):
     if request.method == 'GET':
         print(request.GET)
-        form = accounts_form.SignupForm()
+        form = SignupForm()
         return render(request, 'accounts/signup.html', context={'form' : form})
 
-    elif request.method == 'POST':
-        new_account = Account(
-            username=request.POST['username'],
-            password=request.POST['password'],
-            date_create=timezone.now()
-        )
+    post = request.POST
+    form = SignupForm(post)
 
-        new_account.save()
-        print('account added to db ' + str(new_account))
-        return HttpResponse("Account Signup!")
+    if Account.objects.filter(username=post['username']).count() > 0:
+        messages.warning(request, "account with the same username is already exists!")
+        print("account saved")
+    else:
+        if form.validate_password():
+            form.save()
+            messages.success(request, "Account has been added")
+        else:
+            messages.warning(request, "passwords don't match! {} {}".format(post["password1"], post["password2"]))
+
+    return redirect("signup")

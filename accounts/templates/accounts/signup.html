@@ -11,26 +11,34 @@
     
     <div class="row">
         <div class="col" id="form-area">
-            <form>
-                <div class="form-group">
-                    <label for="email_input">Email address</label>
-                    <input type="email" class="form-control" id="input_email" placeholder="email@mail.com">
-                </div>
+            <form method="POST" action="signup">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="input_username">Username</label>
-                    <input type="text" class="form-control" id="input_username" placeholder="Who do you want to be called?">
+                    <input type="text" class="form-control" name="username" placeholder="Who do you want to be called?">
                 </div>
                 <div class="form-group">
                     <label for="password_input">Password</label>
-                    <input type="password" class="form-control" id="password_input" placeholder="password">
+                    <input type="password" class="form-control" name="password1" placeholder="password">
+                </div>
+                <div class="form-group">
+                    <label for="password_input">Confirm Password</label>
+                    <input type="password" class="form-control" name="password2" placeholder="password">
                 </div>
                 <br>
+                <div class="row">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                    {% endif %}
+                </div>
                 <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">Sign up!</button>
                     </div>
                     <div class="col-6">
-                        <a href="">back to login</a>
+                        <a href="{% url 'login' %}">back to login</a>
                     </div>
                 </div>
             </form>
