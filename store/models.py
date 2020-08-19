@@ -2,11 +2,12 @@ from django.db import models
 from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 
-from accounts.models import Account, Store
+from accounts.models import Store
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Transaction(models.Model):
-    customer = models.ForeignKey(Account, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     store = models.ForeignKey(Store, on_delete=models.CASCADE, default=0)
     amount = models.IntegerField()
     payment = models.CharField(max_length=255, default="DEBIT")

@@ -3,9 +3,11 @@ from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth import authenticate, logout
+from django.contrib.auth import login as d_login
 
-from .forms import SignupForm
-from .models import Account
+from .forms import SignupForm, LoginForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -14,15 +16,27 @@ def login(request):
         form = LoginForm()
         return render(request, 'accounts/login.html', context={'form': form, 'signup_link' : 'signup'})
 
-    elif request.method == 'POST':
-        try:
-            user = Account.objects.get(username=request.POST['username'], password=request.POST['password'])
-            return render(request, 'accounts/profile.html', {
-                'username' : user.username,
-                'create_account' : user.date_create
-            })
-        except ObjectDoesNotExist:
-            return HttpResponse('invalid account id')
+    post = request.POST
+    form = LoginForm(post)
+    if form.user_is_exist():
+        # if user exist in db
+        if form.login_correct():
+            # go to store page
+            user = authenticate(request, username=post["username"], password=post['password'])
+            if user is not None:
+                d_login(request, user)
+                return redirect('home store')
+            else:
+                #authenticate failed
+                messages.error(request, "dunno why, you can't login. ¯\\_(ツ)_/¯")
+                return redirect('login')
+        else:
+            # password does not match with username
+            messages.error(request, "password doesn't match!")
+    else: # username does not exist
+        messages.error(request, "username doesn't exist in database!")
+    
+    return redirect('login')
 
 def signup(request):
     if request.method == 'GET':
@@ -33,9 +47,8 @@ def signup(request):
     post = request.POST
     form = SignupForm(post)
 
-    if Account.objects.filter(username=post['username']).count() > 0:
+    if User.objects.filter(username=post['username']).count() > 0:
         messages.warning(request, "account with the same username is already exists!")
-        print("account saved")
     else:
         if form.validate_password():
             form.save()

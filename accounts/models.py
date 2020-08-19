@@ -1,15 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-
-class Account(models.Model):
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-    cardnumber = models.CharField(max_length=19, default='XXXXXXXXX')
-    date_create = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.username
 
 class Store(models.Model):
     storename = models.CharField(max_length=255)
