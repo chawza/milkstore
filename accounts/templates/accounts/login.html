@@ -15,13 +15,20 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="input_username">Username</label>
-                    <input type="text" class="form-control" placeholder="enter Username">
+                    <input type="text" class="form-control" placeholder="enter Username" name="username">
                 </div>
                 <div class="form-group">
                     <label for="password_input">Password</label>
-                    <input type="password" class="form-control" id="password_input" placeholder="password">
+                    <input type="password" class="form-control" name="password" placeholder="password">
                 </div>
                 <br>
+                {% if messages %}
+                <div class="row">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">Login</button>

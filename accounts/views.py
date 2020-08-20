@@ -6,37 +6,49 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as d_login
 
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm, UserLoginForm
 from django.contrib.auth.models import User
 
 # Create your views here.
 
 def login(request):
     if request.method == 'GET':
-        form = LoginForm()
-        return render(request, 'accounts/login.html', context={'form': form, 'signup_link' : 'signup'})
+        form = UserLoginForm()
+        return render(request, 'accounts/login.html', context={'form': form})
 
     post = request.POST
-    form = LoginForm(post)
-    if form.user_is_exist():
-        # if user exist in db
-        if form.login_correct():
-            # go to store page
-            user = authenticate(request, username=post["username"], password=post['password'])
-            if user is not None:
-                d_login(request, user)
-                return redirect('home store')
-            else:
-                #authenticate failed
-                messages.error(request, "dunno why, you can't login. ¯\\_(ツ)_/¯")
-                return redirect('login')
-        else:
-            # password does not match with username
-            messages.error(request, "password doesn't match!")
-    else: # username does not exist
-        messages.error(request, "username doesn't exist in database!")
+    user = authenticate(request, username=post["username"], password=post['password'])
     
+    if user is not None:
+        d_login(request, user)
+        return redirect('Store Home')
+    else:
+        #authenticate failed
+        form = UserLoginForm(post)
+        if form.is_exist():
+            messages.error("incorrext password")
+        else:
+            messages.error("username does not exist!")
     return redirect('login')
+
+    # if form.user_is_exist():
+    #     # if user exist in db
+    #     if form.login_correct():
+    #         # go to store page
+    #         user = authenticate(request, username=post["username"], password=post['password'])
+    #         if user is not None:
+    #             d_login(request, user)
+    #             return redirect('home store')
+    #         else:
+    #             #authenticate failed
+    #             messages.error(request, "dunno why, you can't login. ¯\\_(ツ)_/¯")
+    #             return redirect('login')
+    #     else:
+    #         # password does not match with username
+    #         messages.error(request, "password doesn't match!")
+    # else: # username does not exist
+    #     messages.error(request, "username doesn't exist in database!")
+    # return redirect('login')
 
 def signup(request):
     if request.method == 'GET':
