@@ -1,3 +1,6 @@
 id_pass.txt
 db.sqlite3
 staticfiles/img/**
+reload_product_db.py
+productlist.csv
+storelist.csv
