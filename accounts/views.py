@@ -24,9 +24,9 @@ def login(request):
         #authenticate failed
         form = UserLoginForm(post)
         if form.is_exist():
-            messages.error("incorrext password")
+            messages.error(request, "incorrext password")
         else:
-            messages.error("username does not exist!")
+            messages.error(request, "username does not exist!")
     return redirect('login')
 
     # if form.user_is_exist():
