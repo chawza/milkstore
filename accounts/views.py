@@ -1,6 +1,4 @@
-from django.shortcuts import render, redirect, Http404
-from django.http import HttpResponse
-from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout
