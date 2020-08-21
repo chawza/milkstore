@@ -12,3 +12,11 @@ class Store(models.Model):
 
     def __str__(self):
         return self.storename
+
+class UserDetail(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='detail')
+    cardnumber = models.CharField(max_length=20)
+    address = models.TextField()
+
+    def __str__(self):
+        return self.user.username + '\'s detail'
