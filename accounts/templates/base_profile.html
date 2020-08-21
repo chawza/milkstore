@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav id="nav">
+            <div class="row">
+                <div class="col-2" id="logo-area">
+                    <div class="row">
+                        <img src='{% static "accounts/img/proffile_placeholder.png" %}' width=40 height=40>
+                        <h2><a href="">{{user.username}}</a></h2>
+                    </div>
+                </div>
+
+                <div class="col-3" id="nav-area">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">Store</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <footer>
+            
+        </footer>
+    </div>
+
+    <script src='{% static "js/jquery-3.5.1.js" %}'></script>
+    <script src="{% static 'accounts/js/profile.js' %}"></script>
+</body>
+</html>

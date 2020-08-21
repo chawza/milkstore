@@ -1,0 +1,53 @@
+{% extends '../base_profile.html' %}
+
+<!--
+    Context:
+        - User
+        - user's transactions
+-->
+
+{% block content %}
+    <main>
+        <div class="row" id="profile-area">
+            <div class="col-4">
+                <img src="accounts/img/proffile_placeholder.png">
+            </div>
+            <div class="col-8">
+                <!--proffile informations-->
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td>username</td>
+                            <td>{{user.username}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date joined</td>
+                            <td>{{user.date}}</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>card number</td>
+                            <td>{{user.cardnumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row" id="transaction-history-area">
+            {% if transactions %}
+                <ul class="list-group">
+                    {% for transaction in transactions %}
+                        <li class="list-group-item">Date: {{transaction.date}} id: {{transaction.id} number items: {{transaction.number_item}}amount: {{transaction.amount}}}</li>
+                    {% endfor %}    
+                </ul>
+            {% else %}
+                    <div class="alert alert-warning">No Transaction history</div>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}
