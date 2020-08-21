@@ -67,3 +67,24 @@ def signup(request):
             messages.warning(request, "passwords don't match! {} {}".format(post["password1"], post["password2"]))
 
     return redirect("signup")
+
+def profile_home(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'You are not authenticated')
+        redirect('login')
+    try:
+        user = User.objects.get(username=request.user.username)
+    except user.DoesNotExist:
+        messages.error(request, "can't find user in database")
+        redirect('login')
+    
+    context = {
+        "user" : {
+            "username" : user.username,
+            "date" : user.date_joined,
+            "email" : user.email,
+            "cardnumber" : 'Fix this later'
+        },
+    }
+
+    return render(request, 'profile', context=context)
