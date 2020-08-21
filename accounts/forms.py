@@ -49,3 +49,8 @@ class SignupForm(forms.Form):
             password=self.data['password1']
         )
         print('${self.username} has been added!')
+
+class EditProfile(forms.Form):
+    address = forms.CharField(max_length=255, required=False)
+    cardnumber = forms.CharField(max_length=20, required=False)
+    email = forms.EmailField(required=False)

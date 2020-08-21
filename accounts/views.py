@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as d_login
 
-from .forms import SignupForm, LoginForm, UserLoginForm
+from .forms import SignupForm, LoginForm, UserLoginForm, EditProfile
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -88,3 +88,20 @@ def profile_home(request):
     }
 
     return render(request, 'profile', context=context)
+
+def profile_edit(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'You are not authenticated')
+        redirect('login')
+    try:
+        user = User.objects.get(username=request.user.username)
+    except user.DoesNotExist:
+        messages.error(request, "can't find user in database")
+        redirect('login')
+    
+    form = EditProfile()
+    form.fields['address'] = user.detail.address
+    form.fields['cardnumber'] = user.detail.cardnumber
+    form.fields['email'] = user.email
+
+    return render(request, 'profile-edit', {'form' : form})
