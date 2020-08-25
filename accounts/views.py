@@ -126,6 +126,13 @@ def profile_edit(request):
     return redirect('profile')
 
 @login_required
+def delete_account(request):
+    user = User.objects.get(username=request.user.username)
+    user.delete()
+    messages.success(request, 'Account has been deleted')
+    return redirect('login')
+
+@login_required
 def logout_account(request):
     logout(request)
     return redirect('login')
