@@ -6,6 +6,7 @@ from django.contrib.auth import login as d_login
 
 from .forms import SignupForm, LoginForm, UserLoginForm, EditProfile
 from django.contrib.auth.models import User
+from .models import UserDetail
 
 # Create your views here.
 
@@ -62,6 +63,9 @@ def signup(request):
     else:
         if form.validate_password():
             form.save()
+            new_user = User.objects.get(username=post["username"])
+            new_detail = UserDetail.objects.create(user=new_user)
+            new_detail.save()
             messages.success(request, "Account has been added")
         else:
             messages.warning(request, "passwords don't match! {} {}".format(post["password1"], post["password2"]))
