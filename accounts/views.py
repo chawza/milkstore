@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as d_login
+from django.contrib.auth.decorators import login_required
 
 from .forms import SignupForm, LoginForm, UserLoginForm, EditProfile
 from django.contrib.auth.models import User
@@ -11,13 +12,16 @@ from .models import UserDetail
 # Create your views here.
 
 def login(request):
+    # response form page for login
     if request.method == 'GET':
         form = UserLoginForm()
         return render(request, 'accounts/login.html', context={'form': form})
 
+    # get post request to authenticate User
     post = request.POST
     user = authenticate(request, username=post["username"], password=post['password'])
     
+    # perform built in User class validation
     if user is not None:
         d_login(request, user)
         return redirect('Store Home')
@@ -50,20 +54,24 @@ def login(request):
     # return redirect('login')
 
 def signup(request):
+    # return form for new user to Sign up
     if request.method == 'GET':
         print(request.GET)
         form = SignupForm()
         return render(request, 'accounts/signup.html', context={'form' : form})
 
+    # add user to db from User form, and then return to signup page with a message
     post = request.POST
     form = SignupForm(post)
 
+    #determine if user is already in database
     if User.objects.filter(username=post['username']).count() > 0:
         messages.warning(request, "account with the same username is already exists!")
     else:
         if form.validate_password():
-            form.save()
+            form.save() # save the new user
             new_user = User.objects.get(username=post["username"])
+             # as well as detail model that associate with the user
             new_detail = UserDetail.objects.create(user=new_user)
             new_detail.save()
             messages.success(request, "Account has been added")
@@ -72,17 +80,9 @@ def signup(request):
 
     return redirect("signup")
 
+@login_required
 def profile_home(request):
-    if not request.user.is_authenticated:
-        messages.error(request, 'You are not authenticated')
-        redirect('login')
-    try:
-        user = User.objects.get(username=request.user.username)
-    except user.DoesNotExist:
-        messages.error(request, "can't find user in database")
-        redirect('login')
-    
-    print(user.email, user.detail.cardnumber)
+    user = User.objects.get(username=request.user.username)
     
     context = {
         "user" : {
@@ -96,15 +96,9 @@ def profile_home(request):
 
     return render(request, 'accounts/profile.html', context=context)
 
+@login_required
 def profile_edit(request):
-    if not request.user.is_authenticated:
-        messages.error(request, 'You are not authenticated')
-        redirect('login')
-    try:
-        user = User.objects.get(username=request.user.username)
-    except user.DoesNotExist:
-        messages.error(request, "can't find user in database")
-        redirect('login')
+    user = User.objects.get(username=request.user.username)
 
     if request.method == 'GET':
         form = EditProfile()
