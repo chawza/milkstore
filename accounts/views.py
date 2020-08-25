@@ -124,3 +124,8 @@ def profile_edit(request):
     user.save()
     messages.success(request, "profile changes has been made")
     return redirect('profile')
+
+@login_required
+def logout_account(request):
+    logout(request)
+    return redirect('login')
