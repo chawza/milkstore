@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +14,14 @@
     <div class="container">
         <nav id="nav">
             <div class="row">
-                <div class="col-2" id="logo-area">
+                <div class="col-3" id="logo-area">
                     <div class="row">
                         <img src='{% static "accounts/img/proffile_placeholder.png" %}' width=40 height=40>
-                        <h2><a href="">{{user.username}}</a></h2>
+                        <h2><a href="">{{user.username}}'s profile</a></h2>
                     </div>
                 </div>
+                
+                <div class="col-6"></div>
 
                 <div class="col-3" id="nav-area">
                     <ul class="nav">

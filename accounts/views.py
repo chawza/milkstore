@@ -78,16 +78,19 @@ def profile_home(request):
         messages.error(request, "can't find user in database")
         redirect('login')
     
+    print(user.email, user.detail.cardnumber)
+    
     context = {
         "user" : {
             "username" : user.username,
             "date" : user.date_joined,
             "email" : user.email,
-            "cardnumber" : 'Fix this later'
+            "cardnumber" : user.detail.cardnumber,
+            'address' : user.detail.address,
         },
     }
 
-    return render(request, 'profile', context=context)
+    return render(request, 'accounts/profile.html', context=context)
 
 def profile_edit(request):
     if not request.user.is_authenticated:
@@ -98,10 +101,28 @@ def profile_edit(request):
     except user.DoesNotExist:
         messages.error(request, "can't find user in database")
         redirect('login')
-    
-    form = EditProfile()
-    form.fields['address'] = user.detail.address
-    form.fields['cardnumber'] = user.detail.cardnumber
-    form.fields['email'] = user.email
 
-    return render(request, 'profile-edit', {'form' : form})
+    if request.method == 'GET':
+        form = EditProfile()
+
+        # form.fields['address'].widget.attrs['placeholder'] = user.detail.address
+        # form.fields['cardnumber'].widget.attrs['placeholder'] = user.detail.cardnumber
+        # form.fields['email'].widget.attrs['placeholder'] = user.email
+        user = {
+            'email' : user.email,
+            'address' : user.detail.address,
+            'cardnumber' : user.detail.cardnumber,
+        }
+        print(user)
+        return render(request, 'accounts/profile_edit.html', {'user' : user})
+    
+    post = request.POST
+    detail = user.detail
+    detail.address = post['address']
+    detail.cardnumber = post['cardnumber']
+    user.email = post['email']
+    
+    detail.save()
+    user.save()
+    messages.success(request, "profile changes has been made")
+    return redirect('profile')

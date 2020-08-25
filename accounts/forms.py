@@ -51,6 +51,6 @@ class SignupForm(forms.Form):
         print('${self.username} has been added!')
 
 class EditProfile(forms.Form):
-    address = forms.CharField(max_length=255, required=False)
-    cardnumber = forms.CharField(max_length=20, required=False)
-    email = forms.EmailField(required=False)
+    address = forms.CharField(required=False, widget=forms.TextInput(attrs={'class' : 'form-control'}), label='Address')
+    cardnumber = forms.CharField(required=False, widget=forms.TextInput(attrs={'class' : 'form-control'}), label='Cardnumber')
+    email = forms.CharField(required=False, widget=forms.EmailInput(attrs={'class' : 'form-control'}), label='Email')

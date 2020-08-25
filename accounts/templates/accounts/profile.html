@@ -1,4 +1,5 @@
 {% extends '../base_profile.html' %}
+{% load static %}
 
 <!--
     Context:
@@ -8,9 +9,14 @@
 
 {% block content %}
     <main>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         <div class="row" id="profile-area">
             <div class="col-4">
-                <img src="{% static 'accounts/img/proffile_placeholder.png' %}">
+                <img src="{% static 'accounts/img/proffile_placeholder.png' %}" width="250" height="auto">
             </div>
             <div class="col-8">
                 <!--proffile informations-->
@@ -29,25 +35,21 @@
                             <td>{{user.email}}</td>
                         </tr>
                         <tr>
+                            <td>address</td>
+                            <td>{{user.address}}</td>
+                        </tr>
+                        <tr>
                             <td>card number</td>
                             <td>{{user.cardnumber}}</td>
                         </tr>
                     </tbody>
                 </table>
+                <a href="{% url 'profile edit' %}" class="btn btn-primary">edit</a>
             </div>
         </div>
 
         <hr>
         <div class="row" id="transaction-history-area">
-            {% if transactions %}
-                <ul class="list-group">
-                    {% for transaction in transactions %}
-                        <li class="list-group-item">Date: {{transaction.date}} id: {{transaction.id} number items: {{transaction.number_item}}amount: {{transaction.amount}}}</li>
-                    {% endfor %}    
-                </ul>
-            {% else %}
-                    <div class="alert alert-warning">No Transaction history</div>
-            {% endif %}
         </div>
     </main>
 {% endblock %}
