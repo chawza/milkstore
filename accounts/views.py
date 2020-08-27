@@ -61,7 +61,7 @@ def signup(request):
         return render(request, 'accounts/signup.html', context={'form' : form})
 
     # add user to db from User form, and then return to signup page with a message
-    post = request.POST
+    post = request.POST    
     form = SignupForm(post)
 
     #determine if user is already in database
@@ -75,6 +75,7 @@ def signup(request):
             new_detail = UserDetail.objects.create(user=new_user)
             new_detail.save()
             messages.success(request, "Account has been added")
+            return redirect('login')
         else:
             messages.warning(request, "passwords don't match! {} {}".format(post["password1"], post["password2"]))
 

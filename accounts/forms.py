@@ -44,11 +44,12 @@ class SignupForm(forms.Form):
             return False
 
     def save(self):
-        User.objects.create(
-            username=self.data['username'],
-            password=self.data['password1']
+        user = User.objects.create(
+            username=self.data['username']
         )
-        print('${self.username} has been added!')
+        user.set_password(self.data['password1'])
+        user.save()
+        print('${user.username} has been added!')
 
 class EditProfile(forms.Form):
     address = forms.CharField(required=False, widget=forms.TextInput(attrs={'class' : 'form-control'}), label='Address')
