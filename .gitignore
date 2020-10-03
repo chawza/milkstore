@@ -4,3 +4,5 @@ staticfiles/img/**
 reload_product_db.py
 productlist.csv
 storelist.csv
+*.pyc
+__pycache__/
