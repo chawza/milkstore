@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
+import json
 
 #import model from other apps
 from products.models import Product
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -33,3 +36,18 @@ def getProuductItems(request, num_item, page):
     json['items'] = item_list
     return JsonResponse(json)
 
+@login_required
+def  transaction_preview(request):
+    shopping_list = json.loads(request.POST)
+    user = User.objects.get(username=request.user.username)
+    
+
+    context = {
+        user : {
+            "cardnumber" : user.detail.cardnumber,
+            'address' : user.detail.address
+        },
+        items : shopping_list.items
+    }
+
+    return render(request, 'store/transaction.html', context)
