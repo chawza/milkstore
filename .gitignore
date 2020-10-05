@@ -5,4 +5,4 @@ reload_product_db.py
 productlist.csv
 storelist.csv
 *.pyc
-__pycache__/
+__pycache__
